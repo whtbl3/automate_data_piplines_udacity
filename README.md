@@ -15,20 +15,62 @@ You'll be provided with a helpers class that contains all the SQL transformation
 
 
 
-## Required
-- Docker compose
-- Config enviroment via dwh.cfg file
-- This airflow:2.5.0 (Dependencies changes)
-
 ## Prerequisites
-- Create an IAM User in AWS.
-- Create a redshift cluster in AWS (This cluster in the `us-west-2` region)
+- Docker compose
+- Config enviroment datawarehouse via dwh.cfg file
+- This airflow: 2.5.0
+
+### [ *Create an IAM User in AWS* ]
+- Open the AWS console by clicking on the **Launch Cloud Gateway** button followed the **Open Cloud Console** button in the classroom ().
+- Search **IAM Users** in the search bar, and then click on **Users**.
+
+![udacity_instruction_create_iam](https://video.udacity-data.com/topher/2022/February/6209f581_iam-users/iam-users.png) 
+<p align="center">Select Users from the search bar</p>
+
+- Click on **Add Users**.
+![udacity_instruction_create_iam](https://video.udacity-data.com/topher/2022/February/6209f5f6_add-users/add-users.png)
+<p align="center">Click on Add users</p>
+
+- Input **User name**.
+- Check the field **Access key - Programmatic access**.
+- Click on **Next Permissions**.
+
+![udacity_instruction_create_iam](https://video.udacity-data.com/topher/2022/February/6209f66d_access-key/access-key.png)
+<p align="center">Input user details</p>
+
+- In the **Set permissions section**, select *Attach existing policies* directly.
+- Search and select the following policies:
+    + AdministratorAccess
+    + AmazonRedshiftFullAccess
+    + AmazonS3FullAccess
+- Click on **Next: Tags**, and the click on **Next Review**.
+
+![udacity_instruction_create_iam](https://video.udacity-data.com/topher/2022/February/6209f767_user-permissions/user-permissions.png)
+<p align="center">Attach existing policies to the user</p>
+
+- You will see a Review section. Ensure that you have the same permissions as in the image below.
+- Finally, click on **Create user**.
+
+![udacity_instruction_create_iam](https://video.udacity-data.com/topher/2022/February/6209f866_user-review/user-review.png)
+<p align="center">Review user details</p>
+
+- You should see a success message and user credentials on the next screen.
+- Click on **Download .csv** to download the credentails for the user you just created. These credentials would be used in connecting AWS to Airflow.
+
+![udacity_instruction_create_iam](https://video.udacity-data.com/topher/2022/February/6209f921_create-user-success/create-user-success.png)
+<p align="center">User credentials</p>
+
+**_NOTE:_** Save the file to this folder
+
+### [ *Create an AWS Redshift Cluster* ]
+- After Create IAM success, Run command `python cluster.py --launch` to craete redshift cluster.
+
 
 ## Setting up Connections
 
 - Connect Airflow and AWS
+    + Use docker to launch airflow.
     + Follow the steps on the page Connect Airflow to AWS in the lesson Data Pipelines.
-    + Use the workspace provided on the page Project Workspace in this lesson.
 - Connect Airflow to the AWS Redshift Cluster
     + Follow the steps on the page Add Airflow Connections to AWS Redshift in the lesson Data Pipelines.
 
@@ -47,12 +89,15 @@ The dag template has all the imports and task templates in place, but the task d
 The operators folder with operator templates
 A helper class for the SQL transformations`
 
-![DAG finished](images/dag_example.png)
+![DAG example](images/dag_example.png)
 
 `2. With these template files, you should be able see the new DAG in the Airflow UI. The graph view should look like this:`
 
 
-![DAG example](images/dags.png)
+![DAG example complete](images/dag_complete.png)
+
+![DAG example complete](images/grand_time.png)
+
 
 # Configuring the DAG
 In the DAG, add default parameters according to these guidelines
@@ -87,5 +132,3 @@ In the DAG, add default parameters according to these guidelines
     Run airflow's dag
 4. Close and delete redshift:
     - Run this command: `python cluster.py --stop`
-    
-
