@@ -63,7 +63,7 @@ You'll be provided with a helpers class that contains all the SQL transformation
 **_NOTE:_** Save the file to this folder
 
 ### [ *Create an AWS Redshift Cluster* ]
-- After Create IAM success, Run command `python cluster.py --launch` to craete redshift cluster.
+- After Create IAM success, Run command `python cluster.py --launch` to create redshift cluster.
 
 
 ## Setting up Connections
